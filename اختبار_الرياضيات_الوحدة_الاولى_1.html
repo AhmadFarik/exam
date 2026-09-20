@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اختبار الرياضيات - الوحدة الأولى</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --navy-2:#243a63;
+    --gold:#e0a530;
+    --teal:#1c9e93;
+    --coral:#e8654f;
+    --violet:#7d5ba6;
+    --pink:#d94f8c;
+    --sky:#2f8fd1;
+    --green:#4c9a5b;
+    --paper:#faf7ef;
+    --line:#d9d2bd;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Cairo',sans-serif;
+    background:#e9e5d8;
+    color:#22283a;
+    padding:18px 0;
+  }
+  .page{
+    width:210mm;
+    min-height:297mm;
+    margin:0 auto 14px auto;
+    background:var(--paper);
+    box-shadow:0 4px 18px rgba(0,0,0,.18);
+    position:relative;
+    padding:12mm 13mm 12mm 13mm;
+    overflow:hidden;
+  }
+  .page::before{
+    content:"";
+    position:absolute; inset:6mm;
+    border:2.5px solid var(--navy);
+    border-radius:16px;
+    pointer-events:none;
+  }
+  .page::after{
+    content:"";
+    position:absolute; inset:9mm;
+    border:1px dashed var(--gold);
+    border-radius:10px;
+    pointer-events:none;
+  }
+  .deco-icon{
+    position:absolute;
+    font-size:26px;
+    opacity:.16;
+    color:var(--navy);
+    transform:rotate(var(--r,0deg));
+  }
+
+  /* ===== Header ===== */
+  .header{
+    position:relative;
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy-2) 55%, var(--sky) 130%);
+    border-radius:14px;
+    padding:14px 18px;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    box-shadow:0 6px 14px rgba(27,42,74,.35);
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .header::before{
+    content:"× ÷ + − √ π % =";
+    position:absolute;
+    left:-10px; top:-14px;
+    font-size:44px;
+    font-weight:800;
+    color:rgba(255,255,255,.08);
+    letter-spacing:10px;
+    white-space:nowrap;
+  }
+  .school-badge{
+    width:58px;height:58px;border-radius:50%;
+    background:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;flex:none;
+    box-shadow:0 0 0 4px rgba(255,255,255,.25);
+  }
+  .header-titles{flex:1;text-align:center;}
+  .header-titles h1{margin:0;font-size:20px;font-weight:900;}
+  .header-titles h2{margin:2px 0 0;font-size:14px;font-weight:600;color:#f4d698;}
+  .bloom-mark{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:10px;
+    padding:6px 10px;
+    font-size:11px;
+    text-align:center;
+    line-height:1.5;
+    flex:none;
+  }
+  .bloom-mark b{display:block;font-size:13px;color:var(--gold);}
+
+  /* ===== Info table ===== */
+  .info-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:14px;
+    font-size:13px;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+  }
+  .info-table td{
+    border:1px solid var(--line);
+    padding:8px 12px;
+    font-weight:600;
+  }
+  .info-table td.label{
+    background:#f1ecdb;
+    color:var(--navy);
+    width:20%;
+    font-weight:800;
+  }
+  .info-table td.fill{
+    width:30%;
+  }
+  .info-table tr:last-child td.fill{
+    width:80%;
+  }
+
+  /* ===== Section / bloom legend ===== */
+  .legend{
+    display:flex;
+    gap:6px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .legend span{
+    font-size:9.5px;
+    font-weight:700;
+    color:#fff;
+    padding:3px 9px;
+    border-radius:20px;
+    opacity:.55;
+  }
+  .legend span.active{opacity:1;}
+  .lvl1{background:var(--sky);}
+  .lvl2{background:var(--teal);}
+  .lvl3{background:var(--green);}
+  .lvl4{background:var(--gold);color:#3a2a00 !important;}
+  .lvl5{background:var(--coral);}
+  .lvl6{background:var(--violet);}
+
+  /* ===== Question card ===== */
+  .q{
+    position:relative;
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px 12px 14px;
+    margin-bottom:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,.06);
+  }
+  .q-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+  }
+  .q-num{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;flex:none;
+  }
+  .q-tag{
+    font-size:10px;font-weight:800;color:#fff;
+    padding:3px 10px;border-radius:20px;
+  }
+  .q-marks{
+    margin-right:auto;
+    font-size:11px;font-weight:700;
+    color:var(--navy);
+    background:#f1ecdb;
+    padding:3px 9px;border-radius:8px;
+  }
+  .q-text{
+    font-size:14px;
+    font-weight:700;
+    color:#1c2333;
+    line-height:1.9;
+    margin-right:36px;
+  }
+  .q-sub{
+    font-size:12.5px;
+    font-weight:500;
+    color:#4a5064;
+    margin-top:4px;
+  }
+  .answer-line{
+    border-bottom:1.5px dotted #9a9375;
+    height:22px;
+    margin:8px 36px 0 4px;
+  }
+  .answer-box{
+    border:1.5px dashed #b7ae8c;
+    border-radius:8px;
+    min-height:46px;
+    margin:8px 36px 0 4px;
+    background:repeating-linear-gradient(#fff,#fff 27px,#efe9d6 28px);
+  }
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:8px 36px 0 4px;
+  }
+  .mini-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:8px 36px 0 4px;
+    font-size:12px;
+    text-align:center;
+  }
+  .mini-table th, .mini-table td{
+    border:1px solid var(--line);
+    padding:5px 4px;
+  }
+  .mini-table th{background:#f1ecdb;color:var(--navy);font-weight:800;}
+  .compare-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:8px 36px 0 4px;
+    font-size:15px;
+    font-weight:800;
+    direction:ltr;
+  }
+  .compare-box{
+    width:34px;height:30px;
+    border:2px solid var(--navy);
+    border-radius:6px;
+  }
+  .icon-row{
+    display:flex;gap:8px;margin-top:4px;margin-right:36px;font-size:12px;color:#7a7458;
+  }
+
+  /* footer */
+  .footer{
+    position:absolute;
+    bottom:11mm; left:13mm; right:13mm;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:11px;
+    color:var(--navy);
+    border-top:1.5px solid var(--gold);
+    padding-top:6px;
+  }
+  .footer .teacher{font-weight:800;}
+  .page-num{
+    background:var(--navy);color:#fff;
+    width:22px;height:22px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;
+  }
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .page{box-shadow:none;margin:0;width:100%;min-height:100vh;}
+  }
+  @page{ size:A4; margin:0; }
+</style>
+</head>
+<body>
+
+<!-- ======================= PAGE 1 ======================= -->
+<div class="page">
+  <span class="deco-icon" style="top:14mm; left:12mm; --r:-15deg;">×</span>
+  <span class="deco-icon" style="top:60mm; left:8mm; --r:10deg;">÷</span>
+  <span class="deco-icon" style="top:110mm; left:14mm; --r:-8deg;">π</span>
+  <span class="deco-icon" style="top:160mm; left:9mm; --r:12deg;">%</span>
+  <span class="deco-icon" style="top:220mm; left:13mm; --r:-10deg;">√</span>
+  <span class="deco-icon" style="top:30mm; right:10mm; --r:12deg;">+</span>
+  <span class="deco-icon" style="top:90mm; right:8mm; --r:-14deg;">−</span>
+  <span class="deco-icon" style="top:150mm; right:12mm; --r:9deg;">=</span>
+  <span class="deco-icon" style="top:200mm; right:9mm; --r:-9deg;">∞</span>
+
+  <div class="header">
+    <div class="school-badge">🎓</div>
+    <div class="header-titles">
+      <h1>مدرسة معاذ بن جبل الأساسية للبنين</h1>
+      <h2>اختبار في مبحث الرياضيات — الوحدة الأولى: الأعداد ضمن الملايين</h2>
+    </div>
+  </div>
+
+  <table class="info-table">
+    <tr>
+      <td class="label">المبحث</td><td class="fill">الرياضيات</td>
+      <td class="label">الصف</td><td class="fill">الخامس الأساسي (ب)</td>
+    </tr>
+    <tr>
+      <td class="label">اسم الطالب</td><td colspan="3" class="fill">.....................................................................................</td>
+    </tr>
+    <tr>
+      <td class="label">اليوم والتاريخ</td><td class="fill">الاثنين 21 / 9 / 2026م</td>
+      <td class="label">الدرجة</td><td class="fill">من 20 درجة</td>
+    </tr>
+  </table>
+
+  <!-- Q1 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">1</div>
+      <span class="q-marks">2 علامة</span>
+    </div>
+    <div class="q-text">اكتبْ القيمةَ المنزليّةَ للرَّقمِ الذي تحتَهُ خطٌّ في العددِ الآتي:</div>
+    <div class="compare-row" style="direction:rtl; justify-content:center; font-size:22px;">4&nbsp;5&nbsp;2&nbsp;<u>7</u>&nbsp;9&nbsp;8&nbsp;3</div>
+    <div class="answer-line"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">2</div>
+      <span class="q-marks">2 علامة</span>
+    </div>
+    <div class="q-text">أكملْ الفراغاتِ الآتية بما يناسبُ:</div>
+    <div class="q-sub">أ) كلُّ 3 أرقامٍ في العددِ تُكوِّنُ معًا ما يُسمّى ...........................</div>
+    <div class="q-sub">ب) الدَّورةُ التي تلي دَورةَ الآحادِ مباشرةً تُسمّى دورةَ ...........................</div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">3</div>
+      <span class="q-marks">3 علامات</span>
+    </div>
+    <div class="q-text">اكتبْ العددَ 3٬452٬780 بالصيغتينِ اللَّفظيَّةِ والتَّحليليَّةِ:</div>
+    <div class="q-sub">الصيغة اللَّفظيَّة:</div>
+    <div class="answer-line"></div>
+    <div class="q-sub">الصيغة التَّحليليَّة:</div>
+    <div class="answer-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">4</div>
+      <span class="q-marks">2 علامة</span>
+    </div>
+    <div class="q-text">فسِّر لماذا تختلفُ القيمةُ المنزليَّةُ للرَّقمِ 6 في العددِ 6٬482٬310 عن قيمتِهِ المنزليَّةِ في العددِ 482٬316؟</div>
+    <div class="answer-box"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">5</div>
+      <span class="q-marks">2 علامة</span>
+    </div>
+    <div class="q-text">ضع الرَّمزَ المناسبَ ( &gt; ، &lt; ، = ) في الدائرةِ لتُصبحَ العبارةُ صحيحةً:</div>
+    <div class="compare-row">
+      <span>7٬124٬511</span>
+      <div class="compare-box"></div>
+      <span>7٬124٬398</span>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">6</div>
+      <span class="q-marks">3 علامات</span>
+    </div>
+    <div class="q-text">رتِّب الأعدادَ الآتيةَ تصاعديًّا (من الأصغرِ إلى الأكبرِ):</div>
+    <div class="q-sub" style="text-align:center; font-size:16px; font-weight:800; direction:ltr;">4٬568٬210 — 4٬586٬120 — 4٬568٬102</div>
+    <div class="answer-line"></div>
+  </div>
+
+  <div class="footer">
+    <span class="teacher">إعداد المعلم: أحمد فضيل فرخ</span>
+    <span class="page-num">1</span>
+  </div>
+</div>
+
+<!-- ======================= PAGE 2 ======================= -->
+<div class="page">
+  <span class="deco-icon" style="top:14mm; left:12mm; --r:-15deg;">÷</span>
+  <span class="deco-icon" style="top:60mm; left:8mm; --r:10deg;">×</span>
+  <span class="deco-icon" style="top:110mm; left:14mm; --r:-8deg;">=</span>
+  <span class="deco-icon" style="top:160mm; left:9mm; --r:12deg;">π</span>
+  <span class="deco-icon" style="top:220mm; left:13mm; --r:-10deg;">%</span>
+  <span class="deco-icon" style="top:30mm; right:10mm; --r:12deg;">+</span>
+  <span class="deco-icon" style="top:90mm; right:8mm; --r:-14deg;">−</span>
+  <span class="deco-icon" style="top:150mm; right:12mm; --r:9deg;">√</span>
+  <span class="deco-icon" style="top:200mm; right:9mm; --r:-9deg;">∞</span>
+
+  <div class="header">
+    <div class="school-badge">📐</div>
+    <div class="header-titles">
+      <h1>مدرسة معاذ بن جبل الأساسية للبنين</h1>
+      <h2>تابع الاختبار — مهارات التفكير العليا</h2>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">7</div>
+      <span class="q-marks">3 علامات</span>
+    </div>
+    <div class="q-text">حلّل الجدولَ الآتي، ثمَّ أجيب عن السؤالِ الذي يليهِ:</div>
+    <table class="mini-table">
+      <tr><th>العام</th><th>2017</th><th>2018</th><th>2019</th></tr>
+      <tr><td>عدد السيّاح</td><td>4٬565٬158</td><td>4٬922٬169</td><td>4٬962٬144</td></tr>
+    </table>
+    <div class="q-sub" style="margin-top:6px;">رتِّب أعدادَ السيّاحِ تنازليًّا، وبيِّن في أيِّ عامٍ كان عددُ السيّاحِ الأكبرَ ولماذا:</div>
+    <div class="answer-line"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">8</div>
+      <span class="q-marks">3 علامات</span>
+    </div>
+    <div class="q-text">بلغتْ أرباحُ شركةٍ في النِّصفِ الأوَّلِ 1٬125٬040 دينارًا، وفي النِّصفِ الثَّاني 1٬095٬400 دينارٍ. أوجد مجموعَ أرباحِ الشَّركةِ في نهايةِ العامِ باستعمالِ لوحةِ القيمةِ المنزليَّةِ:</div>
+    <table class="mini-table" style="direction:ltr; font-size:13px;">
+      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>1</td><td>1</td><td>2</td><td>5</td><td>0</td><td>4</td><td>0</td></tr>
+      <tr><td>+&nbsp;1</td><td>0</td><td>9</td><td>5</td><td>4</td><td>0</td><td>0</td></tr>
+      <tr style="border-top:2px solid var(--navy);"><td colspan="7">&nbsp;</td></tr>
+    </table>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">9</div>
+      <span class="q-marks">3 علامات</span>
+    </div>
+    <div class="q-text">كتبَ أحدُ زملائك العددَ 35٬003٬936 بالصِّيغةِ التَّحليليَّةِ كما يأتي:</div>
+    <div class="q-sub" style="text-align:center; font-size:15px; font-weight:800; direction:ltr;">30,000,000 + 50,000 + 3,000 + 900 + 30 + 6</div>
+    <div class="q-sub">اكتشف الخطأَ في إجابةِ زميلِك، وصحِّحه، مع بيانِ سببِ الخطأ:</div>
+    <div class="answer-box"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q">
+    <div class="q-top">
+      <div class="q-num">10</div>
+      <span class="q-marks">2 علامة</span>
+    </div>
+    <div class="q-text">صمِّم مسألةً حياتيَّةً منَ الواقعِ (كعددِ سكّانِ مدينةٍ، أو مسافةٍ بينَ كوكبينِ) تتضمَّنُ عددًا مكوَّنًا من 7 منازلَ ضمنَ الملايينِ، ثمَّ اكتب هذا العددَ بالصِّيغتينِ اللَّفظيَّةِ والتَّحليليَّةِ:</div>
+    <div class="answer-box" style="min-height:64px;"></div>
+  </div>
+
+  <div class="footer">
+    <span class="teacher">إعداد المعلم: أحمد فضيل فرخ</span>
+    <span class="page-num">2</span>
+  </div>
+</div>
+
+</body>
+</html>
